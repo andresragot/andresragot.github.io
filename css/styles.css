@@ -257,7 +257,8 @@ li {
 }
 
 .square {
-    width: 39%;
+    width: 40%;
+    height: auto;
     padding-top: calc(0.39 * 100%);
 }
 
@@ -268,6 +269,7 @@ li {
 
 .ragot {
     background-image: url("../images/picture.jpg");
+    object-fit: fill;
 }
 
 .stagerush {
@@ -349,6 +351,7 @@ li {
     .square {
         width: 100%;
         padding-top: 100%;
+        object-fit: contain;
     }
 
     .youtube {
