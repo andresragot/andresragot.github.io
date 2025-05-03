@@ -233,6 +233,7 @@
 	display: block;
 	opacity: 0.4;
 	border-radius: 1vw;
+	object-fit: fill;
 }
 
 .rsDefault .rsTmb:hover
