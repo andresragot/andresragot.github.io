@@ -104,7 +104,7 @@ export const fr: typeof es = {
       },
       {
         title: 'Graphismes & Temps réel',
-        items: ['Rastérisation logicielle', 'Pipeline 3D (transform / clip / project)', 'GLM', 'Painter / culling', 'Double buffering', 'Optimisation CPU/mémoire']
+        items: ['Rastérisation logicielle', 'Pipeline 3D (transform / clip / project)', 'GLM', 'OpenGL', 'Vulkan (en cours)', 'Painter / culling', 'Double buffering', 'Optimisation CPU/mémoire']
       },
       {
         title: 'Background jeu vidéo',

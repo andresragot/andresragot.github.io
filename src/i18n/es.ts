@@ -102,7 +102,7 @@ export const es = {
       },
       {
         title: 'Graphics & Real-time',
-        items: ['Software rasterization', 'Pipeline 3D (transform / clip / project)', 'GLM', 'Painter / culling', 'Double buffering', 'Optimización CPU/memoria']
+        items: ['Software rasterization', 'Pipeline 3D (transform / clip / project)', 'GLM', 'OpenGL', 'Vulkan (aprendiendo)', 'Painter / culling', 'Double buffering', 'Optimización CPU/memoria']
       },
       {
         title: 'Game Dev background',
