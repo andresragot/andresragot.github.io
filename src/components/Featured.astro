@@ -1,0 +1,61 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+import { projects } from '../data/projects';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+const esp = projects.find(p => p.id === 'esp32-3d-engine')!;
+---
+<section id="featured">
+  <div class="container">
+    <span class="eyebrow">{d.featured.eyebrow}</span>
+    <div class="featured-grid">
+      <article class="featured-card">
+        <h2 class="mono">{d.featured.title}</h2>
+        <p style="font-size:1.1rem; color: var(--fg);">{d.featured.subtitle}</p>
+        <p class="muted">{d.featured.summary}</p>
+        <ul style="margin-top: 1.2rem;">
+          {d.featured.highlights.map(h => <li>{h}</li>)}
+        </ul>
+        <div class="perf-note">⚠ {d.featured.perfNote}</div>
+        <div class="hero__ctas" style="margin-top: 1.4rem;">
+          <a class="btn btn--primary" href="https://github.com/andresragot/esp32_3d_engine" rel="noopener noreferrer">{d.featured.cta.repo}</a>
+          <a class="btn" href="https://andresragot.github.io/esp32-p4-library/" rel="noopener noreferrer">{d.featured.cta.docs}</a>
+          <a class="btn" href="https://components.espressif.com/components/andresragot/esp32_3d_engine" rel="noopener noreferrer">{d.featured.cta.registry}</a>
+        </div>
+      </article>
+
+      <aside class="hud-card" aria-label="Architecture">
+        <div class="hud-card__label"><span>// architecture</span><span>esp32_3d_engine</span></div>
+        <pre class="mono" style="position:relative; z-index:1; margin:0; font-size:0.7rem; line-height:1.55; color:var(--fg-muted); white-space:pre; overflow:auto;">
++----------------------------------+
+|           app_main()             |
++---------+------------------------+
+| Scene   |       Renderer         |
+| +-----+ |  +--------+ +--------+ |
+| |Node | |  | Camera | |Rasteriz| |
+| | Mesh| |  | view   | | clip/  | |
+| |  ...| |  | proj   | | fill   | |
+| +-----+ |  +--------+ +---+----+ |
+|         |                |       |
+|         |        +-------v----+  |
+|         |        |FrameBuffer |  |
+|         |        |double-buf  |  |
+|         |        +-------+----+  |
+|         |                |       |
+|         |        +-------v----+  |
+|         |        | DriverLCD  |  |
+|         |        |EK79007 /   |  |
+|         |        |ST7262 /    |  |
+|         |        |ST7789      |  |
+|         |        +------------+  |
++----------------------------------+
+        </pre>
+        <div style="position:relative; z-index:1; margin-top: 0.8rem; display:flex; flex-wrap:wrap; gap:0.3rem;">
+          {esp.tech.map(t => <span class="tag mono">{t}</span>)}
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

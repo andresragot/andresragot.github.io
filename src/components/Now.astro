@@ -1,0 +1,18 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section id="now">
+  <div class="container">
+    <span class="eyebrow">{d.now.heading}</span>
+    <div class="now-card">
+      <h2 class="now-card__role">{d.now.role}</h2>
+      <div class="now-card__company">{d.now.company}</div>
+      <div class="now-card__when">{d.now.when}</div>
+      <p class="muted" style="margin: 0.8rem 0 0;">{d.now.desc}</p>
+    </div>
+  </div>
+</section>

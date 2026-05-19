@@ -1,0 +1,106 @@
+---
+import type { Locale } from '../i18n/config';
+import { localizedPath, locales, localeNames } from '../i18n/config';
+import { t } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const dict = t(locale);
+const path = (id: string) => localizedPath(locale) + '#' + id;
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href={localizedPath(locale)} class="logo" aria-label="Andrés Ragot — home">
+      <span class="logo__dot" aria-hidden="true"></span>
+      <span>andres<span style="color:var(--accent)">.</span>ragot</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <div class="nav__links" id="nav-links">
+        <a href={path('about')}>{dict.nav.about}</a>
+        <a href={path('now')}>{dict.nav.now}</a>
+        <a href={path('experience')}>{dict.nav.experience}</a>
+        <a href={path('featured')}>{dict.nav.featured}</a>
+        <a href={path('work')}>{dict.nav.work}</a>
+        <a href={path('demo')}>{dict.nav.demo}</a>
+        <a href={path('contact')}>{dict.nav.contact}</a>
+      </div>
+
+      <div class="nav-tools">
+        <label class="sr-only" for="lang-select">Language</label>
+        <select id="lang-select" class="lang" data-lang-select aria-label="Language">
+          {locales.map(l => (
+            <option value={l} selected={l === locale}>{localeNames[l]}</option>
+          ))}
+        </select>
+
+        <button
+          class="icon-btn"
+          type="button"
+          data-theme-toggle
+          aria-label={dict.theme.toggleLight}
+        >
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+
+        <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-controls="nav-links" aria-expanded="false" aria-label={dict.nav.menu}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Theme toggle
+  const root = document.documentElement;
+  const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch {}
+    });
+  }
+
+  // Language switcher
+  const sel = document.querySelector<HTMLSelectElement>('[data-lang-select]');
+  if (sel) {
+    sel.addEventListener('change', () => {
+      const target = sel.value;
+      try { localStorage.setItem('locale', target); } catch {}
+      const map: Record<string, string> = { es: '/', en: '/en/', fr: '/fr/' };
+      window.location.href = map[target] ?? '/';
+    });
+  }
+
+  // Mobile menu
+  const mt = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.getElementById('nav-links');
+  if (mt && nav) {
+    mt.addEventListener('click', () => {
+      const open = nav.classList.toggle('nav__links--open');
+      mt.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('nav__links--open');
+        mt.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // First-visit locale redirect (only on root)
+  try {
+    const stored = localStorage.getItem('locale');
+    const path = window.location.pathname;
+    if (stored && path === '/' && stored !== 'es') {
+      window.location.replace('/' + stored + '/');
+    }
+  } catch {}
+</script>

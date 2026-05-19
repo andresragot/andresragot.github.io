@@ -1,0 +1,22 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="about" id="about">
+  <div class="container">
+    <span class="eyebrow">{d.about.heading}</span>
+    <div class="about__row">
+      <div>
+        <p>{d.about.p1}</p>
+        <p>{d.about.p2}</p>
+      </div>
+      <div>
+        <p>{d.about.p3}</p>
+        <p class="mono muted">{d.about.languages}</p>
+      </div>
+    </div>
+  </div>
+</section>

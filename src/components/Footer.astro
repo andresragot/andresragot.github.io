@@ -1,0 +1,14 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const dict = t(locale);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div>© {year} Andrés Ragot — {dict.footer.rights}</div>
+    <div>{dict.footer.builtWith}</div>
+  </div>
+</footer>

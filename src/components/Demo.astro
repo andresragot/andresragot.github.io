@@ -1,0 +1,85 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section id="demo">
+  <div class="container">
+    <span class="eyebrow">{d.demo.heading}</span>
+    <p class="muted" style="max-width:60ch;">{d.demo.intro}</p>
+
+    <div class="demo-wrap">
+      <div class="demo-canvas-wrap">
+        <div class="demo-hud">
+          <span><span class="mono">{d.demo.fps}: </span><span class="mono" data-fps>0</span></span>
+          <span><span class="mono">{d.demo.frame}: </span><span class="mono" data-frame>00000</span></span>
+        </div>
+        <canvas class="demo-canvas" data-demo-canvas aria-label="3D wireframe demo"></canvas>
+        <div class="demo-overlay" data-demo-overlay>
+          <p class="mono" style="margin:0; color:#7cf2c0; letter-spacing: 0.05em;">{d.demo.intro}</p>
+          <button class="btn btn--primary" type="button" data-demo-start>▶ {d.demo.play}</button>
+        </div>
+      </div>
+      <div class="demo-controls">
+        <button class="btn" type="button" data-demo-stop hidden>■ {d.demo.stop}</button>
+      </div>
+      <p class="demo-note">"{d.demo.note}"</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-demo-canvas]');
+  const overlay = document.querySelector<HTMLElement>('[data-demo-overlay]');
+  const startBtn = document.querySelector<HTMLButtonElement>('[data-demo-start]');
+  const stopBtn = document.querySelector<HTMLButtonElement>('[data-demo-stop]');
+  const hud = document.querySelector<HTMLElement>('.demo-hud');
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let demo: { start(): void; stop(): void } | null = null;
+
+  async function load() {
+    if (demo) return demo;
+    const mod = await import('../scripts/wireframe');
+    demo = mod.createWireframeDemo(canvas!, hud!);
+    return demo;
+  }
+
+  startBtn?.addEventListener('click', async () => {
+    const d = await load();
+    d.start();
+    overlay!.style.display = 'none';
+    stopBtn!.hidden = false;
+  });
+
+  stopBtn?.addEventListener('click', () => {
+    demo?.stop();
+    overlay!.style.display = '';
+    stopBtn!.hidden = true;
+  });
+
+  if (reduced && overlay) {
+    const note = document.createElement('p');
+    note.className = 'mono';
+    note.style.color = '#ffb86b';
+    note.style.margin = '0';
+    note.textContent = startBtn?.getAttribute('data-reduced') || '';
+  }
+
+  // Auto-pause when out of view
+  if ('IntersectionObserver' in window && canvas) {
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting && demo) {
+          demo.stop();
+          overlay!.style.display = '';
+          stopBtn!.hidden = true;
+        }
+      }
+    }, { threshold: 0.05 });
+    io.observe(canvas);
+  }
+</script>

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Now from '../../components/Now.astro';
+import Experience from '../../components/Experience.astro';
+import Skills from '../../components/Skills.astro';
+import Featured from '../../components/Featured.astro';
+import Work from '../../components/Work.astro';
+import Demo from '../../components/Demo.astro';
+import Contact from '../../components/Contact.astro';
+const locale = 'fr' as const;
+---
+<Base locale={locale}>
+  <Header slot="header" locale={locale} />
+  <Hero locale={locale} />
+  <About locale={locale} />
+  <Now locale={locale} />
+  <Experience locale={locale} />
+  <Skills locale={locale} />
+  <Featured locale={locale} />
+  <Work locale={locale} />
+  <Demo locale={locale} />
+  <Contact locale={locale} />
+  <Footer slot="footer" locale={locale} />
+</Base>

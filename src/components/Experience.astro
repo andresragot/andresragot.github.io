@@ -1,0 +1,36 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section id="experience">
+  <div class="container">
+    <span class="eyebrow">{d.experience.heading}</span>
+    <ol class="timeline" role="list">
+      {d.experience.items.map(item => (
+        <li class="timeline__item">
+          <div class="timeline__head">
+            <span class="timeline__role">{item.role}</span>
+            <span>·</span>
+            <span class="timeline__company">{item.company}</span>
+            <span class="timeline__period">{item.period} · {item.location}</span>
+          </div>
+          <p class="timeline__desc">{item.desc}</p>
+        </li>
+      ))}
+    </ol>
+
+    <h3 style="margin-top: 2.5rem; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">{d.experience.education.heading}</h3>
+    <div class="edu">
+      {d.experience.education.items.map(e => (
+        <div class="edu__item">
+          <div class="edu__title">{e.title}</div>
+          <div class="edu__place">{e.place}</div>
+          <div class="edu__period">{e.period}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

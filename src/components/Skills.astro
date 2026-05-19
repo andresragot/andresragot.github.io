@@ -1,0 +1,22 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section id="skills">
+  <div class="container">
+    <span class="eyebrow">{d.skills.heading}</span>
+    <div class="skills">
+      {d.skills.groups.map(g => (
+        <div class="skill-group">
+          <h3>{g.title}</h3>
+          <ul class="tag-list">
+            {g.items.map(i => <li class="tag">{i}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

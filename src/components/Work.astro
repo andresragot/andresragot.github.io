@@ -1,0 +1,93 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+import { projects, type Category } from '../data/projects';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+const list = projects.filter(p => p.id !== 'esp32-3d-engine');
+const cats: Array<{ key: 'all' | Category; label: string }> = [
+  { key: 'all', label: d.work.filters.all },
+  { key: 'firmware', label: d.work.filters.firmware },
+  { key: 'graphics', label: d.work.filters.graphics },
+  { key: 'games', label: d.work.filters.games },
+  { key: 'tools', label: d.work.filters.tools },
+  { key: 'web', label: d.work.filters.web }
+];
+---
+<section id="work">
+  <div class="container">
+    <div class="work__head">
+      <div>
+        <span class="eyebrow">{d.work.heading}</span>
+        <p class="muted" style="margin:0; max-width: 50ch;">{d.work.intro}</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter projects">
+        {cats.map(c => (
+          <button
+            type="button"
+            class="filter-btn"
+            data-filter={c.key}
+            aria-pressed={c.key === 'all' ? 'true' : 'false'}
+          >{c.label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="project-grid" data-project-grid>
+      {list.map(p => {
+        const tr = p.i18n[locale];
+        return (
+          <article class="project-card" data-categories={p.categories.join(' ')}>
+            {p.image ? (
+              <a class="project-card__media" href={p.links[0]?.href ?? '#'} rel="noopener" aria-label={tr.title}>
+                <img
+                  src={p.image}
+                  alt={tr.title}
+                  loading="lazy"
+                  decoding="async"
+                  width="640"
+                  height="360"
+                />
+              </a>
+            ) : (
+              <div class="project-card__media project-card__media--ph" aria-hidden="true"></div>
+            )}
+            <div class="project-card__body">
+              <div class="project-card__year">
+                {p.categories.map(c => <span class="cat-chip">{c}</span>)}
+                {p.year}
+              </div>
+              <h3 class="project-card__title">{tr.title}</h3>
+              <p class="project-card__tagline">{tr.tagline}</p>
+              <p class="project-card__tech mono">{p.tech.join(' · ')}</p>
+              <div class="project-card__links">
+                {p.links.map(l => (
+                  <a href={l.href} rel="noopener noreferrer">{l.label} ↗</a>
+                ))}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const grid = document.querySelector<HTMLElement>('[data-project-grid]');
+  if (grid) {
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.filter;
+        buttons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        grid.querySelectorAll<HTMLElement>('.project-card').forEach(card => {
+          const cats = (card.dataset.categories || '').split(' ');
+          const show = key === 'all' || cats.includes(key!);
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  }
+</script>

@@ -1,0 +1,34 @@
+---
+import type { Locale } from '../i18n/config';
+import { t } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="hero" id="top">
+  <div class="container hero__grid">
+    <div>
+      <span class="eyebrow">{d.hero.eyebrow}</span>
+      <h1>{d.hero.title}</h1>
+      <p class="hero__lede">{d.hero.lede}</p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="#work">{d.hero.ctaWork}</a>
+        <a class="btn" href="#contact">{d.hero.ctaContact}</a>
+      </div>
+      <div class="hero__meta">
+        <span><span class="dot" aria-hidden="true"></span>{d.hero.available}</span>
+        <span class="mono">📍 {d.hero.location}</span>
+      </div>
+    </div>
+    <aside class="hud-card" aria-label="Stats">
+      <div class="hud-card__label"><span>// status</span><span>● ONLINE</span></div>
+      <pre class="mono" style="margin:0; font-size:0.82rem; color:var(--fg-muted); white-space:pre-wrap; line-height:1.7; position:relative; z-index:1;">
+<span style="color:var(--accent)">role</span>      = "Embedded SW Engineer"
+<span style="color:var(--accent)">stack</span>     = ["C", "C++17/20", "ESP-IDF"]
+<span style="color:var(--accent)">targets</span>   = ["ESP32-P4", "ESP32-S3", "..."]
+<span style="color:var(--accent)">focus</span>     = "firmware · graphics · rt"
+<span style="color:var(--accent)">side</span>      = "esp32_3d_engine"
+<span style="color:var(--accent)">past_life</span> = "Unreal, Unity, gameplay"</pre>
+    </aside>
+  </div>
+</section>
