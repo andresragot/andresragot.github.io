@@ -39,7 +39,8 @@ export const es = {
     p1: 'Empecé donde empieza casi todo el mundo que acaba en bajo nivel: queriendo hacer videojuegos. Estudié ingeniería en INSA de Lyon en 2017 y después un grado de Diseño y Desarrollo de Videojuegos en UDIT en Madrid.',
     p2: 'Por el camino me obsesioné con la parte que casi nadie ve: cómo se mueven los bytes, cómo se rasteriza un triángulo, cuánto cuesta una asignación dinámica, por qué un frame tarda 18 ms en vez de 16. Esa obsesión me llevó del motor al firmware.',
     p3: 'Hoy diseño y desarrollo firmware para productos embebidos: arquitectura asíncrona basada en eventos, estrategias de memoria con PSRAM, abstracciones de hardware modulares y decisiones de firmware guiadas por producto. Sigo escribiendo gráficos por software los fines de semana — porque es donde mis dos mundos se tocan.',
-    languages: 'Idiomas: español, inglés, francés'
+    languages: 'Idiomas: español, inglés, francés',
+    photoAlt: 'Retrato de Andrés Ragot'
   },
   now: {
     heading: 'Ahora',

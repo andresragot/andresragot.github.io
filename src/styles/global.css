@@ -587,3 +587,18 @@ section + section { border-top: 1px solid var(--border); }
 .post-body code { background: var(--bg-elev); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
 .post-body pre { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; overflow-x: auto; }
 .post-body pre code { background: transparent; padding: 0; }
+
+/* --- About: portrait layout --- */
+.about__layout { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: start; }
+.about__photo { margin: 0; }
+.about__photo img {
+  width: 100%; max-width: 200px; height: auto; aspect-ratio: 1 / 1;
+  object-fit: cover; border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elev);
+  display: block;
+}
+@media (max-width: 720px) {
+  .about__layout { grid-template-columns: 1fr; }
+  .about__photo { max-width: 160px; }
+}

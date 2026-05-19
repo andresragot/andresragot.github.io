@@ -41,7 +41,8 @@ export const fr: typeof es = {
     p1: 'J\'ai commencé là où beaucoup de gens qui finissent dans le bas niveau commencent : en voulant faire des jeux vidéo. J\'ai étudié l\'ingénierie à l\'INSA de Lyon en 2017, puis une licence en Game Design & Development à l\'UDIT à Madrid.',
     p2: 'En chemin, je me suis obsédé par ce que personne ne voit : comment les octets bougent, comment on rastérise un triangle, ce que coûte une allocation dynamique, pourquoi une frame prend 18 ms au lieu de 16. Cette obsession m\'a fait glisser du moteur vers le firmware.',
     p3: 'Aujourd\'hui je conçois et développe du firmware pour produits embarqués connectés : architecture asynchrone événementielle, stratégies mémoire avec PSRAM, abstractions matérielles modulaires et décisions firmware guidées par le produit. J\'écris encore des graphismes logiciels le week-end — c\'est là que mes deux mondes se rejoignent.',
-    languages: 'Langues : espagnol, anglais, français'
+    languages: 'Langues : espagnol, anglais, français',
+    photoAlt: 'Portrait d’Andrés Ragot'
   },
   now: {
     heading: 'Maintenant',

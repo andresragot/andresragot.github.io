@@ -41,7 +41,8 @@ export const en: typeof es = {
     p1: 'I started where most people who end up doing low-level work start: wanting to make video games. I studied engineering at INSA de Lyon in 2017 and then a Bachelor in Game Design & Development at UDIT in Madrid.',
     p2: 'Along the way I got obsessed with the parts nobody sees: how bytes move, how a triangle gets rasterized, how much a dynamic allocation costs, why a frame takes 18 ms instead of 16. That obsession pushed me from the engine into the firmware.',
     p3: 'Today I design and build firmware for connected embedded products: asynchronous event-driven architecture, PSRAM-aware memory strategies, modular hardware abstractions and product-driven firmware decisions. I still write software graphics on weekends — that\'s where both worlds meet.',
-    languages: 'Languages: Spanish, English, French'
+    languages: 'Languages: Spanish, English, French',
+    photoAlt: 'Portrait of Andrés Ragot'
   },
   now: {
     heading: 'Now',

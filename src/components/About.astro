@@ -8,14 +8,23 @@ const d = t(locale);
 <section class="about" id="about">
   <div class="container">
     <span class="eyebrow">{d.about.heading}</span>
-    <div class="about__row">
-      <div>
-        <p>{d.about.p1}</p>
-        <p>{d.about.p2}</p>
-      </div>
-      <div>
-        <p>{d.about.p3}</p>
-        <p class="mono muted">{d.about.languages}</p>
+    <div class="about__layout">
+      <figure class="about__photo">
+        <picture>
+          <source srcset="/images/picture.avif" type="image/avif" />
+          <source srcset="/images/picture.webp" type="image/webp" />
+          <img src="/images/picture.jpg" alt={d.about.photoAlt} width="320" height="320" loading="lazy" decoding="async" />
+        </picture>
+      </figure>
+      <div class="about__row">
+        <div>
+          <p>{d.about.p1}</p>
+          <p>{d.about.p2}</p>
+        </div>
+        <div>
+          <p>{d.about.p3}</p>
+          <p class="mono muted">{d.about.languages}</p>
+        </div>
       </div>
     </div>
   </div>

@@ -37,18 +37,24 @@ const cats: Array<{ key: 'all' | Category; label: string }> = [
     <div class="project-grid" data-project-grid>
       {list.map(p => {
         const tr = p.i18n[locale];
+        const webp = p.image?.replace(/\.(jpe?g|png)$/i, '.webp');
+        const avif = p.image?.replace(/\.(jpe?g|png)$/i, '.avif');
         return (
           <article class="project-card" data-categories={p.categories.join(' ')}>
             {p.image ? (
               <a class="project-card__media" href={p.links[0]?.href ?? '#'} rel="noopener" aria-label={tr.title}>
-                <img
-                  src={p.image}
-                  alt={tr.title}
-                  loading="lazy"
-                  decoding="async"
-                  width="640"
-                  height="360"
-                />
+                <picture>
+                  <source srcset={avif} type="image/avif" />
+                  <source srcset={webp} type="image/webp" />
+                  <img
+                    src={p.image}
+                    alt={tr.title}
+                    loading="lazy"
+                    decoding="async"
+                    width="640"
+                    height="360"
+                  />
+                </picture>
               </a>
             ) : (
               <div class="project-card__media project-card__media--ph" aria-hidden="true"></div>
