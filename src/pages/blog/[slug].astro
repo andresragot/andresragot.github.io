@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.locale === 'es' && !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+type Props = { post: CollectionEntry<'blog'> };
+const { post } = Astro.props;
+const { Content } = await post.render();
+const locale = 'es' as const;
+const d = t(locale);
+const fmtDate = (dt: Date) => dt.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Base locale={locale} pathname={`/blog/${post.slug}/`}>
+  <Header slot="header" locale={locale} />
+  <article class="post">
+    <div class="container container--narrow">
+      <a href="/blog/" class="mono muted post-back">{d.blog.back}</a>
+      <h1>{post.data.title}</h1>
+      <p class="mono muted post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>{d.blog.publishedOn} {fmtDate(post.data.pubDate)}</time>
+      </p>
+      <div class="post-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+  <Footer slot="footer" locale={locale} />
+</Base>

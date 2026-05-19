@@ -14,6 +14,7 @@ export const fr: typeof es = {
     skills: 'Compétences',
     featured: 'Projet phare',
     work: 'Travaux',
+    blog: 'Blog',
     games: 'Jeux',
     demo: 'Démo',
     contact: 'Contact',
@@ -204,5 +205,13 @@ export const fr: typeof es = {
     title: 'Page introuvable',
     desc: 'La route que tu cherches n\'existe pas — mais le reste du portfolio, si.',
     home: 'Retour à l\'accueil'
+  },
+  blog: {
+    heading: 'Blog',
+    intro: 'Notes techniques sur le firmware, les graphismes logiciels et les systèmes embarqués.',
+    empty: 'Aucun article publié pour le moment.',
+    readMore: 'Lire l’article',
+    back: '← Retour au blog',
+    updated: 'Mis à jour'
   }
 };

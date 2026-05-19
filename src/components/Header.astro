@@ -7,6 +7,7 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const dict = t(locale);
 const path = (id: string) => localizedPath(locale) + '#' + id;
+const blogPath = localizedPath(locale) + 'blog/';
 ---
 <header class="site-header">
   <div class="container site-header__inner">
@@ -22,6 +23,7 @@ const path = (id: string) => localizedPath(locale) + '#' + id;
         <a href={path('experience')}>{dict.nav.experience}</a>
         <a href={path('featured')}>{dict.nav.featured}</a>
         <a href={path('work')}>{dict.nav.work}</a>
+        <a href={blogPath}>{dict.nav.blog}</a>
         <a href={path('demo')}>{dict.nav.demo}</a>
         <a href={path('contact')}>{dict.nav.contact}</a>
       </div>

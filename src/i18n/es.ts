@@ -12,6 +12,7 @@ export const es = {
     skills: 'Skills',
     featured: 'Proyecto destacado',
     work: 'Trabajos',
+    blog: 'Blog',
     games: 'Videojuegos',
     demo: 'Demo',
     contact: 'Contacto',
@@ -202,5 +203,13 @@ export const es = {
     title: 'Página no encontrada',
     desc: 'La ruta que buscas no existe — pero el resto del portfolio sí.',
     home: 'Volver al inicio'
+  },
+  blog: {
+    heading: 'Blog',
+    intro: 'Notas técnicas sobre firmware, gráficos por software y embebidos.',
+    empty: 'Aún no hay entradas publicadas.',
+    readMore: 'Leer entrada',
+    back: '← Volver al blog',
+    updated: 'Actualizado'
   }
 };

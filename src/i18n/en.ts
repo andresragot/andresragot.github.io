@@ -14,6 +14,7 @@ export const en: typeof es = {
     skills: 'Skills',
     featured: 'Featured',
     work: 'Work',
+    blog: 'Blog',
     games: 'Games',
     demo: 'Demo',
     contact: 'Contact',
@@ -204,5 +205,13 @@ export const en: typeof es = {
     title: 'Page not found',
     desc: 'The route you\'re looking for doesn\'t exist — but the rest of the portfolio does.',
     home: 'Back to home'
+  },
+  blog: {
+    heading: 'Blog',
+    intro: 'Technical notes on firmware, software graphics and embedded systems.',
+    empty: 'No posts published yet.',
+    readMore: 'Read post',
+    back: '← Back to blog',
+    updated: 'Updated'
   }
 };
