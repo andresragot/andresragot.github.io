@@ -508,3 +508,53 @@ section + section { border-top: 1px solid var(--border); }
   .site-header, .back-top, .demo-wrap { display: none; }
   body { background: white; color: black; }
 }
+
+/* --- Benchmarks --- */
+.benchmarks { margin-top: 3rem; }
+.benchmarks h3 {
+  font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.2rem;
+}
+.benchmarks__grid {
+  display: grid; gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.bench-card {
+  border: 1px solid var(--border-strong); border-radius: var(--radius);
+  background: var(--bg-elev); padding: 1.2rem;
+  display: flex; flex-direction: column; gap: 0.9rem;
+}
+.bench-card__head { display: flex; gap: 0.9rem; align-items: flex-start; }
+.bench-card__index {
+  font-size: 0.85rem; color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.15rem 0.45rem; border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  flex-shrink: 0; line-height: 1.3;
+}
+.bench-card__head h4 { margin: 0 0 0.15rem; font-size: 1rem; }
+.bench-card__head p { margin: 0; font-size: 0.85rem; }
+.bench-card__table-wrap { overflow-x: auto; }
+.bench-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.bench-table th, .bench-table td {
+  text-align: left; padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.bench-table th {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--fg-dim); font-weight: 500;
+}
+.bench-table tr:last-child td { border-bottom: 0; }
+.bench-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 4%, transparent); }
+.bench-delta {
+  color: var(--accent); font-family: var(--font-mono);
+  font-size: 0.75rem; margin-left: 0.3rem;
+}
+.bench-footnote {
+  margin-top: 1rem; font-size: 0.8rem;
+  font-family: var(--font-mono);
+}

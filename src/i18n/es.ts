@@ -129,7 +129,28 @@ export const es = {
       'Targets soportados: ESP32-P4 y ESP32-S3 (testeo principal), ESP32 / S2 / C3 según driver.',
       'C++ 99% del codebase. Licencia MIT.'
     ],
-    perfNote: 'Métricas de FPS y memoria pendientes de medir y publicar.',
+    perfNote: 'Métricas reales medidas en hardware. Promedio sobre más de 1000 frames por configuración.',
+    metricsTitle: 'BENCHMARKS REALES',
+    metricsHeader: { device: 'MCU', meshes: 'Mallas', fps: 'FPS', mem: 'Heap libre' },
+    metricsFootnote: 'Promedio sobre más de mil frames por configuración. ESP32-P4 240 MHz / ESP32-S3 240 MHz, ambos con PSRAM.',
+    metrics: {
+      baseline: {
+        title: '01 · Baseline',
+        desc: 'Pipeline inicial: una sola CPU, rasterizado lineal, sin ordenación de polígonos.'
+      },
+      'optimized-meshes': {
+        title: '02 · Mallas optimizadas',
+        desc: 'Mallas reducidas en triángulos y normales precalculadas. Mismo pipeline que baseline.'
+      },
+      painter: {
+        title: '03 · Painter\'s algorithm',
+        desc: 'Polígonos ordenados por profundidad. Menos overdraw, sin Z-buffer.'
+      },
+      parallel: {
+        title: '04 · Paralelo + painter',
+        desc: 'Escena en un core, render en el otro vía std::jthread. Doble buffer en PSRAM.'
+      }
+    },
     cta: {
       repo: 'Repositorio en GitHub',
       docs: 'Documentación Doxygen',

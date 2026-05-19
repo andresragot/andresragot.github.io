@@ -2,10 +2,12 @@
 import type { Locale } from '../i18n/config';
 import { t } from '../i18n';
 import { projects } from '../data/projects';
+import { benchmarks, improvement } from '../data/benchmarks';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const d = t(locale);
 const esp = projects.find(p => p.id === 'esp32-3d-engine')!;
+const fmtMem = (n: number) => (n / 1_000_000).toFixed(1) + ' MB';
 ---
 <section id="featured">
   <div class="container">
@@ -56,6 +58,52 @@ const esp = projects.find(p => p.id === 'esp32-3d-engine')!;
           {esp.tech.map(t => <span class="tag mono">{t}</span>)}
         </div>
       </aside>
+    </div>
+
+    <div class="benchmarks">
+      <h3 class="mono">{d.featured.metricsTitle}</h3>
+      <div class="benchmarks__grid">
+        {benchmarks.map((table, i) => (
+          <article class="bench-card">
+            <header class="bench-card__head">
+              <span class="bench-card__index mono">0{i + 1}</span>
+              <div>
+                <h4 class="mono">{d.featured.metrics[table.id as keyof typeof d.featured.metrics].title}</h4>
+                <p class="muted">{d.featured.metrics[table.id as keyof typeof d.featured.metrics].desc}</p>
+              </div>
+            </header>
+            <div class="bench-card__table-wrap">
+              <table class="bench-table">
+                <thead>
+                  <tr>
+                    <th>{d.featured.metricsHeader.device}</th>
+                    <th>{d.featured.metricsHeader.meshes}</th>
+                    <th>{d.featured.metricsHeader.fps}</th>
+                    <th>{d.featured.metricsHeader.mem}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {table.rows.map(row => {
+                    const delta = table.id === 'baseline' ? null : improvement(table.id, row.device, row.meshes);
+                    return (
+                      <tr>
+                        <td class="mono">{row.device}</td>
+                        <td class="mono">{row.meshes}</td>
+                        <td class="mono">
+                          {row.fps.toFixed(2)}
+                          {delta !== null && delta > 0 && <span class="bench-delta">+{delta}%</span>}
+                        </td>
+                        <td class="mono">{fmtMem(row.mem)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="bench-footnote muted">{d.featured.metricsFootnote}</p>
     </div>
   </div>
 </section>
